@@ -1,4 +1,4 @@
-/* -------------------------------- 
+/* --------------------------------
 
 Primary style
 
@@ -16,7 +16,7 @@ html * {
 
 body {
   font-size: 100%;
-  font-family: "Droid Serif", serif;
+  font-family: "PT Mono";
   color: #7f8c97;
   background-color: #e9f0f5;
 }
@@ -24,7 +24,7 @@ body {
 a {
   color: #acb7c0;
   text-decoration: none;
-  font-family: "Open Sans", sans-serif;
+  font-family: "PT Mono";
 }
 
 img {
@@ -32,15 +32,23 @@ img {
 }
 
 h1, h2 {
-  font-family: "Open Sans", sans-serif;
+  font-family: "PT Mono";
   font-weight: bold;
 }
 
-/* -------------------------------- 
+
+/* --------------------------------
 
 Modules - reusable parts of our design
 
 -------------------------------- */
+.accesibility{
+  font-family: "PT Mono";
+  font-weight: bold;
+  font-size: 5.0rem;
+  color: yellow;
+  box-shadow: 0 0 0 2px orange;
+}
 .cd-container {
   /* this class is used to give a max-width to the element it is applied to, and center it horizontally when it reaches that max-width */
   width: 90%;
@@ -54,16 +62,16 @@ Modules - reusable parts of our design
   clear: both;
 }
 
-/* -------------------------------- 
+/* --------------------------------
 
-Main components 
+Main components
 
 -------------------------------- */
 header {
   height: 200px;
   line-height: 200px;
   text-align: center;
-  background: #303e49;
+  background: darkorange;
 }
 header h1 {
   color: white;
@@ -158,7 +166,7 @@ header h1 {
   background: #75ce66;
 }
 .cd-timeline-img.cd-movie {
-  background: #c03b44;
+  background: yellow;
 }
 .cd-timeline-img.cd-location {
   background: #f0ca45;
@@ -189,6 +197,10 @@ header h1 {
     opacity: 0;
     -webkit-transform: scale(0.5);
   }
+  30% {
+    opacity: 0.7;
+    -moz-transform: scale(1.2);
+  }
 
   60% {
     opacity: 1;
@@ -203,6 +215,10 @@ header h1 {
   0% {
     opacity: 0;
     -moz-transform: scale(0.5);
+  }
+  30% {
+    opacity: 0.7;
+    -moz-transform: scale(1.2);
   }
 
   60% {
