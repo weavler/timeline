@@ -1,0 +1,28 @@
+<script id="timelineBlocks" type="text/html">
+  <section id="cd-timeline" class="cd-container">
+    {{#features}}
+    <div class="cd-timeline-block">
+      <div class="cd-timeline-img cd-movie">
+        <img src="img/cd-icon-bookmark.svg" alt="Movie">
+      </div>
+      <div class="cd-timeline-content">
+        <h2>{{title}}</h2>
+        <p>{{content}}
+          <ul>
+          {{#tasks}}
+              <li>
+              {{#.}}
+                  <b><i class="fa fa-shield fa-rotate-270"></i> {{.}}</b>
+              {{/.}}
+              </li>
+          {{/tasks}}
+          </ul>
+        </p>
+        <a href="#0" class="cd-read-more">Read more</a>
+        <span><input type="checkbox"  value="isTaskFinished">Done</span>
+        <span class="cd-date">{{date}}</span>
+      </div>
+    </div>
+    {{/features}}
+  </section>
+</script>

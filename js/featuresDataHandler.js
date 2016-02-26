@@ -1,60 +1,41 @@
 jQuery(document).ready(function($){
-  var template = '{{#props}}\
-    <ul>\
-    {{#brands}}\
-        <li>\
-        {{#.}}\
-            <b>{{.}}</b>\
-        {{/.}}\
-        </li>\
-    {{/brands}}\
-    </ul>\
-    {{/props}}';
-
-    var featureTemplate = '{{#features}}\
-    <div class="cd-timeline-block"> \
-			<div class="cd-timeline-img cd-movie"> \
-				<img src="img/cd-icon-movie.svg" alt="Movie">\
-			</div> \
-			<div class="cd-timeline-content">\
-				<h2>{{title}}</h2>\
-				<p>{{content}}\
-          <ul>\
-          {{#tasks}}\
-              <li>\
-              {{#.}}\
-                  <b>{{.}}</b>\
-              {{/.}}\
-              </li>\
-          {{/tasks}}\
-          </ul>\
-        </p>\
-				<a href="#0" class="cd-read-more">Read more</a>\
-				<span class="cd-date">{{date}}</span>\
-			</div> \
-		</div>\
-    {{/features}}';
 
 
-    // var timelineBlocks = {
-    //   "features":[
-    //     {
-    //       title: "First heading",
-    //       content: "First content",
-    //       date: "March 30, 2016"
-    //     }
-    //   ]
-    // };
+  $.getJSON('features.js').done(function (data) {
 
-    $.getJSON('features.js').done(function (data) {
-      var html = Mustache.to_html(featureTemplate, data);
-      console.log(html);
-      $('#testmustache').html(html);
-    });
+    // Template loded from templates/features.htm with id timelineBlocks
+    $.get('https://raw.githubusercontent.com/weavler/marketing/gh-pages/templates/features.htm', function(templates){
+      var template = $(templates).filter('#timelineBlocks').html();
+      $('#feature-container').append(Mustache.render(template, data));
 
-    //console.log(features);
+      // Animation function begin
+      var timelineBlocks = $('.cd-timeline-block'),
+    		offset = 0.8;
 
+    	//hide timeline blocks which are outside the viewport
+    	hideBlocks(timelineBlocks, offset);
 
+    	//on scolling, show/animate timeline blocks when enter the viewport
+    	$(window).on('scroll', function(){
+    		(!window.requestAnimationFrame)
+    			? setTimeout(function(){ showBlocks(timelineBlocks, offset); }, 100)
+    			: window.requestAnimationFrame(function(){ showBlocks(timelineBlocks, offset); });
+    	});
 
+    	function hideBlocks(blocks, offset) {
+    		blocks.each(function(){
+    			( $(this).offset().top > $(window).scrollTop()+$(window).height()*offset ) && $(this).find('.cd-timeline-img, .cd-timeline-content').addClass('is-hidden');
+    		});
+    	}
+
+    	function showBlocks(blocks, offset) {
+    		blocks.each(function(){
+    			( $(this).offset().top <= $(window).scrollTop()+$(window).height()*offset && $(this).find('.cd-timeline-img').hasClass('is-hidden') ) && $(this).find('.cd-timeline-img, .cd-timeline-content').removeClass('is-hidden').addClass('bounce-in');
+    		});
+    	}
+    })
+    // Animation functions ended
+
+  });
 
 });
